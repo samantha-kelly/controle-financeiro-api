@@ -1,0 +1,6 @@
+/target/
+/.apt_generated/
+/.apt_generated_tests/
+.project
+org.eclipse*
+.classpath
