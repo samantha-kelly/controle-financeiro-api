@@ -44,7 +44,8 @@ class ContaServiceTest {
 		// Arrange
 		String loginUsuario = "user@login.com";
 
-		List<Conta> contasEsperadas = List.of(Conta.builder().nome("Conta Corrente").build(),
+		List<Conta> contasEsperadas = List.of(
+				Conta.builder().nome("Conta Corrente").build(),
 				Conta.builder().nome("Cartão Crédito").build());
 
 		Mockito.when(contaRepositoryMock.findAllContasByUsuarioLogin(loginUsuario)).thenReturn(contasEsperadas);
