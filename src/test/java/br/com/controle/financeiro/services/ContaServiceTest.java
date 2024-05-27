@@ -57,6 +57,7 @@ class ContaServiceTest {
 		Assertions.assertEquals(contasEsperadas, contasObtidas);
 	}
 
+	
 	@Test
 	void deveObterContaPorId() {
 
@@ -87,12 +88,12 @@ class ContaServiceTest {
 
 		ContaRequestDTO novaContaDto = new ContaRequestDTO(null, nomeNovaConta);
 
-		List<Conta> contasExistentes = List.of(Conta.builder().nome("Cartão Crédito").build());
+		List<Conta> contasExistentes = List.of(Conta.builder().nome("Conta Corrente").build());
 		Mockito.when(contaRepositoryMock.findAllContasByUsuarioLogin(loginUsuario)).thenReturn(contasExistentes);
 
 		Usuario usuario = Usuario.builder().login(loginUsuario).id("1234").build();
 		Mockito.when(usuarioRepositoryMock.findByLogin(loginUsuario)).thenReturn(usuario);
-
+		//Retorna a conta que foi salva no banco
 		Conta contaEsperada = Conta.builder().nome(nomeNovaConta).usuario(usuario).build();
 		Mockito.when(contaRepositoryMock.save(Mockito.any(Conta.class))).thenReturn(contaEsperada);
 
@@ -103,6 +104,7 @@ class ContaServiceTest {
 		Assertions.assertTrue(contaResultado != null);
 		Assertions.assertEquals(contaEsperada, contaResultado);
 
+		//verifica que um método da depencia com mock foi chamado com os parâmetros esperados.
 		Mockito.verify(contaRepositoryMock).findAllContasByUsuarioLogin(loginUsuario);
 		Mockito.verify(usuarioRepositoryMock).findByLogin(loginUsuario);
 	}
@@ -200,11 +202,8 @@ class ContaServiceTest {
 		Mockito.when(contaRepositoryMock.findById(idConta)).thenReturn(Optional.of(contaCorrente));
 
 		// Assert
-		Assertions.assertThrows(
-				// Assert
-				NegocioException.class,
-				// Act
-				() -> contaService.deletarConta(idConta, loginUsuario));
+		Assertions.assertThrows( NegocioException.class,
+			() -> contaService.deletarConta(idConta, loginUsuario));
 	}
 
 	@Test
@@ -224,7 +223,7 @@ class ContaServiceTest {
 	void deveLancarErroAoValidarContaMesmoNome() {
 
 		// Arrange
-		List<Conta> contas = List.of(Conta.builder().nome("Conta Corrente").build(),
+		List<Conta> contas = List.of(Conta.builder().nome("Contorrente").build(),
 				Conta.builder().nome("Cartão Crédito").build());
 
 		Assertions.assertThrows(
@@ -234,6 +233,14 @@ class ContaServiceTest {
 				() -> contaService.validarContaComMesmoNome("Cartão Crédito", contas));
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 	@ParameterizedTest
 	@MethodSource("provedorParametrosNomesContas")
 	void naoDeveLancarErroAoValidarContasComNomesDiferentes(String nomeContaParametrizada,
@@ -249,12 +256,12 @@ class ContaServiceTest {
 	static Stream<Arguments> provedorParametrosNomesContas() {
 
 		List<Conta> contas = List.of(
-				Conta.builder().nome("Conta Conjunta").build(),
-				Conta.builder().nome("Cartão Crédito 1").build(), 
-				Conta.builder().nome("Cartão Crédito 2").build());
+				Conta.builder().nome("Conta Corrente").build(),
+				Conta.builder().nome("Cartão Crédito 2").build(), 
+				Conta.builder().nome("Cartão Crédito 3").build());
 
 		return Stream.of(
-				Arguments.of("Conta Conjunta 1", contas), 
+				Arguments.of("Cartão Crédito 1", contas), 
 				Arguments.of("Cartão Crédito 3", contas),
 				Arguments.of("Conta teste 3", null), 
 				Arguments.of("Cartão Crédito 4", contas));

@@ -10,9 +10,34 @@ public class CalculadoraTDDTeste {
 	void deveRetornarSomaCorreta_QuandoSomarDoisNumeros() {
 
 		// Arrange
+		int num1 = 2;
+		int num2 = 3;
 		CalculadoraTDD calculadora = new CalculadoraTDD();
 
-		int resultado = calculadora.soma(2, 3);
-		assertEquals(5, resultado); // Esperado 2 + 3 = 5
+		//Act
+		int resultado = calculadora.soma(num1,num2);
+		
+		//Assert		
+		assertEquals(5, resultado); 
+		
 	}
+	
+
+	@Test
+	void deveRetornarSubtracaoCorreta_QuandoSubtrairDoisNumeros() {
+
+		// Arrange
+		int num1 = 4;
+		int num2 = -2;
+		CalculadoraTDD calculadora = new CalculadoraTDD();
+
+		//Act
+		int resultado = calculadora.subtracao(num1,num2);
+		
+		//Assert		
+		assertEquals(6, resultado); 
+		
+	}
+	
+
 }

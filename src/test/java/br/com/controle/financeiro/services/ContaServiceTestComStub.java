@@ -23,12 +23,14 @@ class ContaServiceTestComStub {
 	@Test
 	void deveObterTodasContas() {
 		
+		// Arrange
+		
 		contaService = new ContaService(
 				contaRepositoryStub, 
 				usuarioRepository, 
 				validacaoDadosUsuarioService);
 
-		// Arrange
+		
 		String loginUsuario = "user@login.com";
 		
 		List<Conta> contasEsperadas = contaRepositoryStub.findAllContasByUsuarioLogin(loginUsuario);

@@ -45,11 +45,11 @@ public class ContaService {
         List<Conta> contas = contaRepository.findAllContasByUsuarioLogin(userLogin);
         validarContaComMesmoNome(contaDTO.nome(), contas);
 
-        UserDetails usuario = usuarioRepository.findByLogin(userLogin);
+        Usuario usuario = (Usuario) usuarioRepository.findByLogin(userLogin);
 
         Conta c = new Conta();
         c.setNome(contaDTO.nome());
-        c.setUsuario((Usuario) usuario);
+        c.setUsuario(usuario);
 
         return contaRepository.save(c);
     }
