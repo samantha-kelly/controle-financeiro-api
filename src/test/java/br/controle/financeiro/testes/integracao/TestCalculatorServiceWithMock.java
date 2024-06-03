@@ -27,7 +27,7 @@ public class TestCalculatorServiceWithMock {
 	@Test
     public void testAddAndSubtract() {
         // Configura o mock para o método add
-        when(calculator.add(3, 3)).thenReturn(8);
+        when(calculator.add(5, 3)).thenReturn(8);
 
         // Configura o mock para o método subtract
         when(calculator.subtract(8, 2)).thenReturn(6);

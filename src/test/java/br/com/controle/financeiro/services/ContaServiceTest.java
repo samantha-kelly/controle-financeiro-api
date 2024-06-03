@@ -84,7 +84,7 @@ class ContaServiceTest {
 
 		// Arrange
 		String loginUsuario = "user@login.com";
-		String nomeNovaConta = "Conta Corrente";
+		String nomeNovaConta = "Nova Conta";
 
 		ContaRequestDTO novaContaDto = new ContaRequestDTO(null, nomeNovaConta);
 
@@ -257,13 +257,13 @@ class ContaServiceTest {
 
 		List<Conta> contas = List.of(
 				Conta.builder().nome("Conta Corrente").build(),
-				Conta.builder().nome("Cartão Crédito 2").build(), 
-				Conta.builder().nome("Cartão Crédito 3").build());
+				Conta.builder().nome("Cartão Crédito 1").build(), 
+				Conta.builder().nome("Cartão Crédito 2").build());
 
 		return Stream.of(
-				Arguments.of("Cartão Crédito 1", contas), 
-				Arguments.of("Cartão Crédito 3", contas),
+				Arguments.of("Cartão Crédito 3", contas), 
+				Arguments.of("Cartão Crédito 4", contas),
 				Arguments.of("Conta teste 3", null), 
-				Arguments.of("Cartão Crédito 4", contas));
+				Arguments.of("Cartão Crédito 5", contas));
 	}
 }
