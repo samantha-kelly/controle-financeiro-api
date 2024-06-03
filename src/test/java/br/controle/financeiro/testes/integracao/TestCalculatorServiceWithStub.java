@@ -11,7 +11,7 @@ public class TestCalculatorServiceWithStub {
 		CalculatorStub calculatorStub = new CalculatorStub();
 		CalculatorService calculatorService = new CalculatorService(calculatorStub);
 
-		int result = calculatorService.addAndSubtract(5, 3, 2);
+		int result = calculatorService.addAndSubtract(7, 3, 2);
 		assertEquals(6, result);
 	}
 }
